@@ -1,11 +1,11 @@
 
 const val x = 2
-const val titulo = "The Good Code"
+const val titulo = "Kotlin"
 
 fun main(args: Array<String>) {
 
     println(titulo)
     
-    // titulo = "TGC"
+    // titulo = "2 DAM"
 
 }

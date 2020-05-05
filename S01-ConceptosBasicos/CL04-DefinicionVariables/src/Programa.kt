@@ -1,10 +1,10 @@
 
 fun main(args: Array<String>) {
 
-    var titulo = "The Good Code"
+    var titulo = "2 DAM"
     var subtitulo: String
 
-    subtitulo = "Academia online"
+    subtitulo = "Aprendiendo Kotlin"
 
     println("Título: " + titulo)
     println("Subtítulo: " + subtitulo)
