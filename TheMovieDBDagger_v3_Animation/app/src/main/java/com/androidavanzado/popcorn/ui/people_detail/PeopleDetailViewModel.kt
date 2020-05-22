@@ -4,13 +4,17 @@ import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.androidavanzado.popcorn.api.response.APIError
 import com.androidavanzado.popcorn.api.response.PersonDetail
 import com.androidavanzado.popcorn.api.response.PopularPeopleResponse
 import com.androidavanzado.popcorn.common.Resource
 import com.androidavanzado.popcorn.repository.TheMovieDBRepository
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import okhttp3.ResponseBody
+import retrofit2.Converter
 import retrofit2.Response
+import java.io.IOException
 import javax.inject.Inject
 import javax.inject.Scope
 import javax.inject.Singleton
@@ -43,6 +47,7 @@ class PeopleDetailViewModel @Inject constructor(
                 return Resource.Success(resultResponse)
             }
         }
-        return Resource.Error(response.message())
+        val error: APIError = theMovieDBRepository.parseError(response)
+        return Resource.Error(error.status_message)
     }
 }

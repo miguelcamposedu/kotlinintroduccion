@@ -30,7 +30,8 @@ class PersonDetailScrollingActivity : AppCompatActivity() {
         }
 
         val extras: Bundle? = intent.extras
-        val id = extras?.getInt(Constants.EXTRA_PERSON_ID)
+        // val id = extras?.getInt(Constants.EXTRA_PERSON_ID)
+        val id = 87456292
         val photo = extras?.getString(Constants.EXTRA_PERSON_PHOTO)
         val name = extras?.getString(Constants.EXTRA_PERSON_NAME)
 

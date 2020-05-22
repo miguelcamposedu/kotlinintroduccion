@@ -1,19 +1,20 @@
 package com.androidavanzado.popcorn.api
 
-import android.content.Context
-import android.content.SharedPreferences
-import android.provider.Settings.Global.getString
-import com.androidavanzado.popcorn.R
+import com.androidavanzado.popcorn.api.response.APIError
 import com.androidavanzado.popcorn.common.Constants
-import com.androidavanzado.popcorn.di.MyApp
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient
+import okhttp3.ResponseBody
+import retrofit2.Converter
+import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.io.IOException
 import java.util.concurrent.TimeUnit
 import javax.inject.Named
 import javax.inject.Singleton
+
 
 @Module
 class NetworkModule {
@@ -40,13 +41,18 @@ class NetworkModule {
 
     @Singleton
     @Provides
-    fun provideTheMovieDBRetrofitService(@Named("url") baseUrl: String, okHttpClient: OkHttpClient): TheMovieDBService {
+    fun provideRetrofit(@Named("url") baseUrl: String, okHttpClient: OkHttpClient): Retrofit {
         return Retrofit.Builder()
             .baseUrl(baseUrl)
             .addConverterFactory(GsonConverterFactory.create())
             .client(okHttpClient)
             .build()
-            .create(TheMovieDBService::class.java)
+    }
+
+    @Singleton
+    @Provides
+    fun provideTheMovieDBRetrofitService(retrofit: Retrofit): TheMovieDBService {
+        return retrofit.create(TheMovieDBService::class.java)
     }
 
 }
